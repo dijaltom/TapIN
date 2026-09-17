@@ -1,0 +1,62 @@
+name: Build iOS (Unsigned)
+
+on:
+  workflow_dispatch: # Allows you to manually trigger the build from the GitHub UI
+
+jobs:
+  build:
+    name: Build iOS IPA
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod install
+
+      - name: Build Unsigned App
+        run: |
+          cd ios
+          # We force xcodebuild to skip all code signing so it succeeds without an Apple Dev account
+          xcodebuild -workspace TapIN.xcworkspace \
+            -scheme TapIN \
+            -configuration Release \
+            -sdk iphoneos \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            archive \
+            -archivePath $PWD/build/TapIN.xcarchive
+
+      - name: Package into IPA
+        run: |
+          cd ios/build
+          # Create the Payload folder structure required by standard IPA files
+          mkdir -p Payload
+          # Move the compiled .app into the Payload folder
+          mv TapIN.xcarchive/Products/Applications/TapIN.app Payload/
+          # Zip it up into an .ipa file
+          zip -r TapIN-unsigned.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: TapIN-Unsigned-IPA
+          path: ios/build/TapIN-unsigned.ipa
