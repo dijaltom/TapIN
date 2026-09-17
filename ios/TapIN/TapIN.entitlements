@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- NFC Tag Reading (CoreNFC) -->
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>NDEF</string>
+		<string>TAG</string>
+	</array>
+
+	<!-- Apple Wallet / PassKit -->
+	<key>com.apple.developer.pass-presentation.suppress-autofill</key>
+	<true/>
+
+	<!-- Push Notifications (for location reminders) -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>
