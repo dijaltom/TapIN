@@ -21,7 +21,7 @@
     "react-native-mmkv": "^3.1.0",
     "react-native-nfc-manager": "^3.14.14",
     "react-native-qrcode-svg": "^6.3.15",
-    "react-native-reanimated": "^3.16.5",
+    "react-native-reanimated": "3.16.5",
     "react-native-safe-area-context": "^5.1.0",
     "react-native-screens": "^4.4.0",
     "react-native-svg": "^15.8.0",
