@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "node scripts/fix-rngh.js"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^7.2.0",
@@ -46,6 +47,7 @@
     "@types/uuid": "^10.0.0",
     "eslint": "^8.19.0",
     "jest": "^29.6.3",
+    "patch-package": "^8.0.1",
     "prettier": "2.8.8",
     "typescript": "5.0.4"
   },
