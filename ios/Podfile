@@ -6,7 +6,7 @@ use_frameworks! :linkage => :static
 
 # React Native pods
 require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
 
 prepare_react_native_project!
 
